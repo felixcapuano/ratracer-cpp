@@ -15,4 +15,6 @@ int main()
 	scene.addObject(sphere);
 
 	scene.render("test.bmp",1024,768);
+
+	return 0;
 }

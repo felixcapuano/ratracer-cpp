@@ -7,6 +7,7 @@ public:
 
 	Vector operator + (const Vector &v) const;
 	Vector operator - (const Vector &v) const;
+	Vector operator * (double factor) const;
 	double dot(const Vector &v) const;
 	double norm() const;
 	void normalize();

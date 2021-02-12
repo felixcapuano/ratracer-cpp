@@ -20,6 +20,11 @@ Vector Vector::operator - (const Vector &v) const
 	return Vector(x - v.x, y - v.y, z - v.z);
 }
 
+Vector Vector::operator * (double factor) const
+{
+	return Vector(x * factor, y * factor, z * factor);
+}
+
 double Vector::dot(const Vector &v) const
 {
 	return x * v.x + y * v.y + z * v.z;

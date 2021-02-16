@@ -35,6 +35,14 @@ double Vector::norm() const
 	return sqrt(x*x+y*y+z*z);
 }
 
+Vector Vector::cross(const Vector &v) const
+{
+	double x = y*v.getZ() - z*v.getY();
+	double y = z*v.getX() - x*v.getZ();
+	double z = x*v.getY() - y*v.getX();
+	return Vector(x, y, z);
+}
+
 void Vector::normalize()
 {
 	double theNorm = norm();
@@ -43,4 +51,19 @@ void Vector::normalize()
 		y /= theNorm;
 		z /= theNorm;
 	}
+}
+
+double Vector::getX() const
+{
+	return x;
+}
+
+double Vector::getY() const
+{
+	return y;
+}
+
+double Vector::getZ() const
+{
+	return z;
 }

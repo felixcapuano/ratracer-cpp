@@ -10,7 +10,11 @@ public:
 	Vector operator * (double factor) const;
 	double dot(const Vector &v) const;
 	double norm() const;
+	Vector cross(const Vector &v) const;
 	void normalize();
+	double getX() const;
+	double getY() const;
+	double getZ() const;
 protected:
 	double x, y, z;
 };

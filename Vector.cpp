@@ -37,10 +37,7 @@ double Vector::norm() const
 
 Vector Vector::cross(const Vector &v) const
 {
-	double x = y*v.getZ() - z*v.getY();
-	double y = z*v.getX() - x*v.getZ();
-	double z = x*v.getY() - y*v.getX();
-	return Vector(x, y, z);
+    return Vector(y*v.z - z*v.y, z*v.x - x*v.z, x*v.y - y*v.x);
 }
 
 void Vector::normalize()
@@ -66,4 +63,15 @@ double Vector::getY() const
 double Vector::getZ() const
 {
 	return z;
+}
+
+std::ostream &operator << (std::ostream &out, const Vector v){
+    out << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+    return out;
+}
+
+
+std::istream &operator >> (std::istream &in, Vector &v){
+    in >> v.x >> v.y >> v.z;
+    return in;
 }

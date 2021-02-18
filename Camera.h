@@ -1,26 +1,30 @@
+#pragma once
+
+#include "Vector.h"
+
 class Ray;
-class Vector;
 
 struct Screen
 {
-    double height;
-    double width;
+    unsigned int height;
+    unsigned int width;
     double distance;
 };
 
 class Camera
 {
 public:
-    Camera();
-    Camera(Ray _orientation, Screen _screen);
+    Camera(const Vector& _pos, const Vector& _target, const Vector& _up, const Screen& _screen);
     ~Camera();
     Ray getRay(const int x, const int y) const;
 protected:
-    Ray orientation;
+    Vector pos;
+
+    Vector target;
+    Vector up;
+    Vector right;
+
     Screen screen;
-private:
-    void _computeDownVect();
-    void _computeRightVect();
-    Vector downVect;
-    Vector rightVect;
+
+    double resolution;
 };

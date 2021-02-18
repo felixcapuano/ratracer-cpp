@@ -13,3 +13,18 @@ Color Color::operator + (const Color &color) const
 {
 	return Color(r + color.r, g + color.g, b + color.b);
 }
+
+double Color::getBlue() const
+{
+	return b;
+}
+
+double Color::getGreen() const
+{
+	return g;
+}
+
+double Color::getRed() const
+{
+	return r;
+}

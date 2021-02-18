@@ -7,6 +7,10 @@ public:
 	~Color();
 
 	Color operator + (const Color &color) const;
+
+	double getBlue() const;
+	double getGreen() const;
+	double getRed() const;
 protected:
 	double r, g, b;
 };

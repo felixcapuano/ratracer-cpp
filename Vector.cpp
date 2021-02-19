@@ -40,7 +40,7 @@ Vector Vector::cross(const Vector &v) const
     return Vector(y*v.z - z*v.y, z*v.x - x*v.z, x*v.y - y*v.x);
 }
 
-void Vector::normalize()
+Vector Vector::normalize()
 {
 	double theNorm = norm();
 	if (theNorm != 0) {
@@ -48,6 +48,7 @@ void Vector::normalize()
 		y /= theNorm;
 		z /= theNorm;
 	}
+	return *this;
 }
 
 double Vector::getX() const

@@ -13,8 +13,17 @@ public:
 	double getBlue() const;
 	double getGreen() const;
 	double getRed() const;
-	friend std::ostream &operator<<(std::ostream &out, const Color c);
-	friend std::istream &operator>>(std::istream &in, Color &c);
+	Color cap();
+	Color operator * (const float k);
+	Color operator * (const Color c);
+	Color operator + (const Color c);
+	Color operator = (const Color c);
+	Color operator *= (const Color c);
+	Color operator += (const Color c);
+	Color operator *= (const float k);
+	friend std::ostream &operator << (std::ostream &out, const Color c);
+	friend std::istream &operator >> (std::istream &in, Color &c);
+
 protected:
 	double r, g, b;
 };

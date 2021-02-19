@@ -6,26 +6,44 @@
 #include "Scene.h"
 #include "Sphere.h"
 #include "Camera.h"
+#include "DirectionalLight.h"
+#include "PointLight.h"
 
 int main()
 {
-	struct Screen screen = {1000, 1000, 1};
-	Vector pos(6,0,0);
-	Vector target(-1,0,0);
-	Vector upv(0,0,1);
+	// CAMERA => TODO improve up vector
+	struct Screen screen = {500, 500, 1};
+	Vector pos(0,0,10);
+	Vector target(0,0,-1);
+	Vector upv(1,0,0);
 	Camera * camera = new Camera(pos, target, upv, screen);
 
+	// SCENE
 	Scene scene(camera);
 
-	Sphere *sphere = new Sphere(Vector(0,0.2,0),0.2);
-	sphere->setColor(Color(1,0,0));
-	scene.addObject(sphere);
+	// OBJECT
+	Sphere *sphereRed = new Sphere(Vector(0,0,0),0.1);
+	sphereRed->setColor(Color(1,0,0));
+	scene.addObject(sphereRed);
 
-	Sphere *sphere2 = new Sphere(Vector(0,-0.2,0),0.2);
-	sphere2->setColor(Color(0,1,0));
-	scene.addObject(sphere2);
+	Sphere *sphereGreen = new Sphere(Vector(-0.15,0,0),0.1);
+	sphereGreen->setColor(Color(0,1,0));
+	scene.addObject(sphereGreen);
 
-	//scene.render("test.bmp",1024,768);
+	Sphere *sphereBlue = new Sphere(Vector(-0.075,0.15,0),0.1);
+	sphereBlue->setColor(Color(0,0,1));
+	scene.addObject(sphereBlue);
+
+	// LIGHTING
+	DirectionalLight *dirLight = new DirectionalLight(Vector(1,-1,0), Color(1,1,1));
+	scene.addLight(dirLight);
+
+	PointLight *pointLight1 = new PointLight(Vector(2,0,0.5), Color(1,1,1));
+	scene.addLight(pointLight1);
+
+	PointLight *pointLight2 = new PointLight(Vector(0,-2,0.5), Color(1,1,1));
+	scene.addLight(pointLight2);
+
 	scene.render("test.bmp");
 
 	return 0;

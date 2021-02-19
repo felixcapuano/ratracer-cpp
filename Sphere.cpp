@@ -40,3 +40,8 @@ double Sphere::intersectionDistance(const Ray &ray)
 
     return r;
 }
+
+Vector Sphere::getNormAt(const Vector point)
+{
+    return (point - center).normalize();
+}

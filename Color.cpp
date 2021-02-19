@@ -29,6 +29,53 @@ double Color::getRed() const
 	return r;
 }
 
+Color Color::operator * (const float k){
+    return Color(r * k, g * k, b * k);
+}
+
+
+Color Color::operator * (const Color c){
+    return Color(r * c.r, g * c.g, b * c.b);
+}
+
+Color Color::operator + (const Color c){
+    return Color(r + c.r, g + c.g, b + c.b);
+}
+
+Color Color::operator = (const Color c){
+    r = c.r;
+    g = c.g;
+    b = c.b;
+	// alpha
+    //a = c.a;
+
+    return *this;
+}
+
+Color Color::operator *= (const Color c){
+    r *= c.r;
+    g *= c.g;
+    b *= c.b;
+
+    return *this;
+}
+
+Color Color::operator *= (const float k){
+    r *= k;
+    g *= k;
+    b *= k;
+
+    return *this;
+}
+
+Color Color::operator += (const Color c){
+    r += c.r;
+    g += c.g;
+    b += c.b;
+
+    return *this;
+}
+
 std::ostream &operator << (std::ostream &out, const Color c){
     out << "(" << c.r << ", " << c.g << ", " << c.b << ")";
     return out;
@@ -38,4 +85,18 @@ std::ostream &operator << (std::ostream &out, const Color c){
 std::istream &operator >> (std::istream &in, Color &c){
     in >> c.r >> c.g >> c.b;
     return in;
+}
+
+Color Color::cap(){
+    if(r > 1){
+        r = 1;
+    }
+    if(g > 1){
+        g = 1;
+    }
+    if(b > 1){
+        b = 1;
+    }
+
+    return *this;
 }

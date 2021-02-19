@@ -14,12 +14,12 @@ public:
 	double dot(const Vector &v) const;
 	double norm() const;
 	Vector cross(const Vector &v) const;
-	void normalize();
+	Vector normalize();
 	double getX() const;
 	double getY() const;
 	double getZ() const;
-	friend std::ostream &operator<<(std::ostream &out, const Vector v);
-	friend std::istream &operator>>(std::istream &in, Vector &v);
+	friend std::ostream &operator << (std::ostream &out, const Vector v);
+	friend std::istream &operator >> (std::istream &in, Vector &v);
 protected:
 	double x, y, z;
 };

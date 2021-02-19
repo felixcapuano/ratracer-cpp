@@ -11,7 +11,6 @@
 #include <iostream>
 #include <cmath>
 
-
 Scene::Scene(Camera* _camera)
 	:camera(_camera)
 {
@@ -19,13 +18,6 @@ Scene::Scene(Camera* _camera)
 
 Scene::~Scene()
 {
-	/*
-	// old way
-	for (unsigned int i = 0; i < objects.size(); i++) {
-		delete objects[i];
-	}
-	*/
-	// C++ 11
 	delete camera;
 	for (Object *object: objects) {
 		delete object;
@@ -89,9 +81,25 @@ Color Scene::raytrace(const Ray& ray)
 
 Color Scene::localIllumination(Vector impact, Object * impactObject)
 {
-	Color color;
-	color = impactObject->getColor();
-	return color;
+	Color finalColor(0,0,0);
+
+	//// DELETE
+	Color objectColor = impactObject->getColor();
+	double diffuse = 0;
+
+	Vector vectNormal = impactObject->getNormAt(impact);
+
+	for (Light *light : this->lights) {
+		Vector impactToLight = light->getDirection(impact);
+		
+		diffuse = diffuse + vectNormal.dot(impactToLight);
+	}
+	if(diffuse<0) diffuse = 0;
+	//if(diffuse>1) diffuse = 1;
+
+    finalColor = objectColor * diffuse *1000;
+	//finalColor.cap();
+	return finalColor;
 }
 
 

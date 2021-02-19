@@ -9,16 +9,12 @@
 
 // test
 #include <iostream>
+#include <cmath>
 
 
-Scene::Scene()
+Scene::Scene(Camera* _camera)
+	:camera(_camera)
 {
-	struct Screen screen = {700, 1000, 1};
-	s = screen;
-	Vector pos(5,0,0);
-	Vector target(-1,0,0);
-	Vector upv(0,0,1);
-	camera = new Camera(pos, target, upv, screen);
 }
 
 Scene::~Scene()
@@ -51,6 +47,7 @@ void Scene::addLight(Light *light)
 
 void Scene::render(std::string fileName)
 {
+	struct Screen s = camera->getScreen();
 	unsigned char *buffer = new unsigned char[s.width*s.height*3];
 	for (unsigned int y = 0; y < s.height; y++) {
 		for (unsigned int x = 0; x < s.width; x++) {
@@ -61,7 +58,7 @@ void Scene::render(std::string fileName)
 
 			unsigned int index = (y * s.width + x) * 3;
 			buffer[index] = int(255*c.getBlue()); // blue
-			buffer[index+1] = int(255*c.getBlue()); // green
+			buffer[index+1] = int(255*c.getGreen()); // green
 			buffer[index+2] = int(255*c.getRed()); // red
 		}
 	}
@@ -102,17 +99,17 @@ Object *Scene::findNearestObject(const Ray &ray, double &nearestDistance)
 {
 	Object *nearestObject;
 	double distance;
-	double min = 100000;
+	double min = INFINITY;
 	for (Object *object : this->objects) {
 		// get nearest object
 		distance = object->intersectionDistance(ray);
 
-		if (distance < min) {
+		if (distance < min && distance > 0) {
 			min = distance;
 			nearestObject = object;
 		}
 	}
-	nearestDistance = distance;
+	nearestDistance = min == INFINITY ? 0 : min;
 
 	return nearestObject;
 }

@@ -28,3 +28,14 @@ double Color::getRed() const
 {
 	return r;
 }
+
+std::ostream &operator << (std::ostream &out, const Color c){
+    out << "(" << c.r << ", " << c.g << ", " << c.b << ")";
+    return out;
+}
+
+
+std::istream &operator >> (std::istream &in, Color &c){
+    in >> c.r >> c.g >> c.b;
+    return in;
+}

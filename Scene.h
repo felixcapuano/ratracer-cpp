@@ -15,7 +15,7 @@ class Ray;
 class Scene
 {
 public:
-	Scene();
+	Scene(Camera* _camera);
 	~Scene();
 	void addObject(Object *object);
 	void addLight(Light *light);
@@ -27,5 +27,4 @@ protected:
 	std::vector<Object*> objects;
 	std::vector<Light*> lights;
 	Camera* camera;
-	struct Screen s;
 };

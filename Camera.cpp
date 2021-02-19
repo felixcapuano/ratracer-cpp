@@ -22,7 +22,6 @@ Camera::~Camera()
 {
 }
 
-#include <iostream>
 Ray Camera::getRay(const int x, const int y) const
 {
     Vector dir;
@@ -34,4 +33,9 @@ Ray Camera::getRay(const int x, const int y) const
     dir = (target - up*yRate + right*xRate*aspecRatio)*screen.distance;
 
     return Ray(pos, dir);
+}
+
+Screen Camera::getScreen() const
+{
+    return screen;
 }

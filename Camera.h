@@ -17,14 +17,12 @@ public:
     Camera(const Vector& _pos, const Vector& _target, const Vector& _up, const Screen& _screen);
     ~Camera();
     Ray getRay(const int x, const int y) const;
+    Screen getScreen() const;
 protected:
     Vector pos;
-
     Vector target;
     Vector up;
     Vector right;
-
     Screen screen;
-
     double resolution;
 };
